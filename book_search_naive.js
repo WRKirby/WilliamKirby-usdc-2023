@@ -32,19 +32,14 @@
     for(var x in scannedTextObj) {
         console.log(scannedTextObj[x]);
         for (var y in scannedTextObj[x].Content) {
-            words = scannedTextObj[x].Content[y].Text.split(" ")
-            for(i in words) {
-                if(words[i] === searchTerm) {
-                    res = {
-                        "ISBN": scannedTextObj[x].ISBN,
-                        "Page": scannedTextObj[x].Content[y].Page,
-                        "Line": scannedTextObj[x].Content[y].Line,
-                    };
-                    result.Results.push(res);
-                    break;
-                }
+            if(scannedTextObj[x].Content[y].Text.search(searchTerm) != -1) {
+                res = {
+                    "ISBN": scannedTextObj[x].ISBN,
+                    "Page": scannedTextObj[x].Content[y].Page,
+                    "Line": scannedTextObj[x].Content[y].Line,
+                };
+                result.Results.push(res);
             }
-            console.log(words);
         }
     }
 
